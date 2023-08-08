@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sangeet_g/models/pagination.dart';
-import 'package:sangeet_g/providers/category_provider.dart';
+import 'package:sangeet_g/providers/providers.dart';
 
 import '../models/category.dart';
 

@@ -6,6 +6,9 @@ import 'package:sangeet_g/config.dart';
 import 'package:sangeet_g/models/category.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sangeet_g/models/product_filter.dart';
+
+import '../models/product.dart';
 
 final apiService=Provider((ref)=>APIService());
 
@@ -16,24 +19,17 @@ class APIService{
     Map<String,String> requestHeaders= {
       'Content-Type':'application/json'
     };
-    print('Below MAP');
+
     Map<String,String> queryString={
       'page':page.toString(),
       'pageSize':pageSize.toString()
     };
-    print('apiUrl=${Config.apiURL}');
-    print('categoryAPI=${Config.categoryAPI}');
-    print('queryString=$queryString');
 
     var url=Uri.http(Config.apiURL,Config.categoryAPI);
 
-    print('url=$url');
-
-
     var response= await client.get(url,headers: requestHeaders);
     var body=response.body;
-    print('BODY=$body');
-    print('response=$response');
+
     if(response.statusCode==200)
       {
         var data=jsonDecode(response.body);
@@ -43,4 +39,44 @@ class APIService{
       return null;
     }
   }
+
+
+  FutureOr<List<Product>?> getProducts(ProductFilterModel productFilterModel) async {
+    print("CALLING API");
+    Map<String,String> requestHeaders= {
+      'Content-Type':'application/json'
+    };
+    print('Below MAP');
+    Map<String,String> queryString={
+      'page':productFilterModel.paginationModel.page.toString(),
+      'pageSize':productFilterModel.paginationModel.pageSize.toString()
+    };
+    print('apiUrl=${Config.apiURL}');
+    print('categoryAPI=${Config.categoryAPI}');
+    print('queryString=$queryString');
+
+    if(productFilterModel.categoryId!=null){
+      queryString["categoryId"]=productFilterModel.categoryId.toString();
+    }
+    var url=Uri.http(Config.apiURL,Config.productAPI);
+
+    print('url=$url');
+
+
+    var response= await client.get(url,headers: requestHeaders);
+    var body=response.body;
+    print('BODY=$body');
+    print('response=$response');
+    if(response.statusCode==200)
+    {
+      var data=jsonDecode(response.body);
+      return productsFromJson(data["data"]) ;
+    }
+    else {
+      return null;
+    }
+  }
+
+
+
 }
