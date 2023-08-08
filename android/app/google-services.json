@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "943907957848",
+    "project_id": "sangeetgr-3504a",
+    "storage_bucket": "sangeetgr-3504a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943907957848:android:d625c31b806a1cc2002e2d",
+        "android_client_info": {
+          "package_name": "com.example.sangeet_g"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943907957848-l0rhapv7mgv3sldbr4blue80fitqaj44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzvam4S6raIWxnQfItHShFAUAkHBpopcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943907957848-l0rhapv7mgv3sldbr4blue80fitqaj44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
