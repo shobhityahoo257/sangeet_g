@@ -58,6 +58,11 @@ class APIService{
     if(productFilterModel.categoryId!=null){
       queryString["categoryId"]=productFilterModel.categoryId.toString();
     }
+
+    if(productFilterModel.sortBy!=null)
+      {
+        queryString["sort"]=productFilterModel.sortBy!;
+      }
     var url=Uri.http(Config.apiURL,Config.productAPI);
 
     print('url=$url');

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sangeet_g/models/pagination.dart';
+import 'package:sangeet_g/models/product_filter.dart';
 import 'package:sangeet_g/providers/providers.dart';
 
 import '../models/category.dart';
@@ -43,7 +44,7 @@ class HomeCategoryWidget extends ConsumerWidget {
     return categories.when(
       data:(list){
         print('DATE IS RECEIVED');
-        return _buildCategoryList(list! as List<Category>);
+        return _buildCategoryList(list! as List<Category>,ref);
       },
       error:(_,__)=> const Center(child : Text('ERR Got')),
       loading:() => const Center(child: CircularProgressIndicator(),),
@@ -51,24 +52,35 @@ class HomeCategoryWidget extends ConsumerWidget {
   }
 
 
-  Widget _buildCategoryList(List<Category> categories){
+  Widget _buildCategoryList(List<Category> categories,WidgetRef ref){
     return Container(
       height: 150,
       alignment: Alignment.centerLeft,
-      child: ListView.builder(itemBuilder: (contex,index){
+      child: ListView.builder(itemBuilder: (context,index){
         var data=categories[index];
         return GestureDetector(
           onTap:(){
-
+            ProductFilterModel filterModel=ProductFilterModel(paginationModel: PaginationModel(
+              page: 1,pageSize: 10
+            ),
+              categoryId: data.categoryId,
+            );
+            ref.read(productFilterProvider.notifier).setProductFilter(filterModel);
+            ref.read(productNotifierProvider.notifier).getProducts();
+          //Navigating to Product page and also sending two arguments
+            Navigator.of(context).pushNamed('/products',arguments: {
+             'categoryId':data.categoryId,
+              'categoryName':data.categoryName,
+            });
           },
           child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.all(8),
-                  width: 50,
-                  height: 70,
+                  margin: const EdgeInsets.all(5),
+                  width: 150,
+                  height: 100,
                   alignment: Alignment.center,
                   child: Image.network(data.fullImagePath,height: 100,),
                 ),

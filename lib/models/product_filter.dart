@@ -8,6 +8,7 @@ abstract class ProductFilterModel with _$ProductFilterModel{
   factory ProductFilterModel({
     required PaginationModel paginationModel,
     String? categoryId,
+    String? sortBy,
 
 })=_ProductFilterModel;
 }
