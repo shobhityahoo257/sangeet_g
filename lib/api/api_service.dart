@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sangeet_g/models/product_filter.dart';
 
 import '../models/product.dart';
+import '../models/slider.dart';
 
 final apiService=Provider((ref)=>APIService());
 
@@ -63,6 +64,10 @@ class APIService{
       {
         queryString["sort"]=productFilterModel.sortBy!;
       }
+
+    if(productFilterModel.productIds!=null){
+      queryString["productIds"]=productFilterModel.productIds!.join(",");
+    }
     var url=Uri.http(Config.apiURL,Config.productAPI);
 
     print('url=$url');
@@ -82,6 +87,45 @@ class APIService{
     }
   }
 
+  Future<List<SliderModel>?> getSliders(page,pageSize) async {
+    Map<String,String> requestHeaders= {
+      'Content-Type':'application/json'
+    };
 
+    Map<String,String> queryString={
+      'page':page.toString(),
+      'pageSize':pageSize.toString()
+    };
+
+    var url=Uri.http(Config.apiURL,Config.sliderAPI);
+
+    var response= await client.get(url,headers: requestHeaders);
+    if(response.statusCode==200)
+    {
+      var data=jsonDecode(response.body);
+      return sliderFromJson(data["data"]) ;
+    }
+    else {
+      return null;
+    }
+
+  }
+
+Future<Product?> getProductDetail(String productId) async{
+  Map<String,String> requestHeaders= {
+    'Content-Type':'application/json'
+  };
+  var url=Uri.http(Config.apiURL,"${Config.productAPI}/$productId");
+  var response=await client.get(url,headers: requestHeaders);
+  if(response.statusCode==200)
+  {
+    var data=jsonDecode(response.body);
+
+    return Product.fromJson(data["data"]);
+  }
+  else {
+    return null;
+  }
+}
 
 }

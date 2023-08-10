@@ -9,6 +9,7 @@ import 'package:sangeet_g/application/state/product_state.dart';
 import 'package:sangeet_g/models/pagination.dart';
 import 'package:sangeet_g/models/product.dart';
 import 'package:sangeet_g/models/product_filter.dart';
+import 'package:sangeet_g/models/slider.dart';
 
 import '../models/category.dart';
 
@@ -43,3 +44,25 @@ final productNotifierProvider=
           ref.watch(productFilterProvider),
         ),
     );
+
+
+final sliderProvider=FutureProvider.family<List<SliderModel>?,PaginationModel>(
+    (ref,paginationModel){
+      final sliderRepo=ref.watch(apiService);
+      return sliderRepo.getSliders(paginationModel.page, paginationModel.pageSize);
+    }
+);
+
+final productDetailsProvider= FutureProvider.family<Product?,String>(
+    (ref,productId){
+      final apiRepository=ref.watch(apiService);
+      return apiRepository.getProductDetail(productId);
+    }
+);
+
+final relatedProductProvider=
+    FutureProvider.family<List<Product>? ,ProductFilterModel>(
+        (ref,productFilterModel){
+          final apiRepository=ref.watch(apiService);
+          return apiRepository.getProducts(productFilterModel);
+        });

@@ -39,12 +39,20 @@ class ProductCard extends StatelessWidget {
                   ),) ,
 
                 ),)),
-            SizedBox(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              child: Image.network(model!.fullImagePath,fit: BoxFit.cover
-                ,),
+            GestureDetector(onTap: (){
+              Navigator.of(context).pushNamed('/product-detail',
+              arguments: {'productId':model!.productId},
+              );
+
+            },
+
+              child: SizedBox(
+                height: 100,
+                width: MediaQuery.of(context).size.width,
+                child: Image.network(model!.fullImagePath,fit: BoxFit.cover
+                  ,),
       ),
+            ),
          Padding(
            padding:const EdgeInsets.only(top: 8,left: 10) ,
             child:Text(

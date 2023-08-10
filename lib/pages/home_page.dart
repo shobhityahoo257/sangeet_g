@@ -4,6 +4,7 @@ import 'package:sangeet_g/component/product_card.dart';
 import 'package:sangeet_g/models/category.dart';
 import 'package:sangeet_g/widgets/widget_home_categories.dart';
 import 'package:sangeet_g/widgets/widget_home_products.dart';
+import 'package:sangeet_g/widgets/widget_home_slider.dart';
 
 import '../models/product.dart';
 
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
 
     return  Scaffold(
       body: Container(
-        child: ListView(children:  const [HomeCategoryWidget(),HomeProductWidget()],),
+        child: ListView(children:  const [HomeSliderWidget() ,HomeCategoryWidget(),HomeProductWidget()],),
       ),
     );
   }

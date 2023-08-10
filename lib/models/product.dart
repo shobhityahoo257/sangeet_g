@@ -24,6 +24,7 @@ abstract class Product with _$Product{
     required String productType,
     required String productStatus,
     required String productId,
+    List<String>? relatedProducts,
 
   })=_Product;
 

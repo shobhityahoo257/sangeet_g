@@ -25,7 +25,7 @@ class _ProductsPageState extends State<ProductsPage> {
         title: const Text('Products'),
       ),
       body: Container(
-        color: Colors.grey,
+        color: Colors.white,
         child:  Column(
           mainAxisAlignment:MainAxisAlignment.start ,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +34,7 @@ class _ProductsPageState extends State<ProductsPage> {
               categoryId: categoryId,
               categoryName: categoryName,
             ),
-            Flexible(child: _ProductList(),
-            flex: 1,)
+            Flexible(flex: 1,child: _ProductList(),)
           ],
         ),
       )
@@ -59,8 +58,8 @@ class _ProductsPageState extends State<ProductsPage> {
 class _ProductFilter extends ConsumerWidget {
   final _sortByOptions=[
     ProductSortModel(value: "createdAt",label: "Latest"),
-    ProductSortModel(value: "productPrice",label: "Price: High to Low"),
-    ProductSortModel(value: "productPrice",label: "Price:Low to High"),
+    ProductSortModel(value: "productPrice",label: "Price High to Low"),
+    ProductSortModel(value: "productPrice",label: "Price Low to High"),
   ];
   _ProductFilter({
     Key? key,
@@ -94,17 +93,18 @@ class _ProductFilter extends ConsumerWidget {
              ),
            ),
            Container(
-             decoration: BoxDecoration(
+             decoration: const BoxDecoration(
                color: Colors.grey,
              ),
              child: PopupMenuButton(
                onSelected: (sortBy){
                  ProductFilterModel filterModel=ProductFilterModel(
-                   paginationModel: PaginationModel(pageSize: 10,page: 1),
+                   paginationModel: PaginationModel(pageSize: 10,page: 0),
                    categoryId: filterProvider.categoryId,
                    sortBy: sortBy.toString()
                  );
                  ref.read(productFilterProvider.notifier).setProductFilter(filterModel);
+                 ref.read(productNotifierProvider.notifier).getProducts();
                },
                initialValue: filterProvider.sortBy,
                itemBuilder: (BuildContext context){
@@ -148,16 +148,17 @@ final ScrollController _scrollController=ScrollController();
     });
     if(productState.products.isEmpty)
       {
-        if(productState.hasNext && !productState.isLoading){
+        if(!productState.hasNext && !productState.isLoading){
           return const Center(
             child: Text('No Products'),
           );
         }
-        return LinearProgressIndicator();
+        return const LinearProgressIndicator();
       }
     
     return  RefreshIndicator(
         onRefresh: ()async{
+          print('On Refresh Called');
       ref.read(productNotifierProvider.notifier).refreshProducts();
     },
     child :Column(
