@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sangeet_g/models/product_filter.dart';
 
+import '../models/cart.dart';
 import '../models/product.dart';
 import '../models/slider.dart';
 
@@ -127,5 +128,106 @@ Future<Product?> getProductDetail(String productId) async{
     return null;
   }
 }
+
+
+Future<Cart?> getCart() async{
+
+    Map<String,String> requestHeaders={
+      'Content-Type':'application/json',
+      'Authorization':'Basic token'
+    };
+
+    var url=Uri.http(Config.apiURL,Config.cartAPI);
+    var response=await client.get(url,headers: requestHeaders);
+
+    if(response.statusCode==200)
+    {
+      var data=jsonDecode(response.body);
+
+      return Cart.fromJson(data["data"]);
+    }
+    else if(response.statusCode==401)
+      {
+        //user's token is expired
+        //write code to move user to login page
+      }
+    else {
+      return null;
+    }
+
+
+
+}
+
+  Future<bool?> addCartItem(productId,qty) async{
+
+    Map<String,String> requestHeaders={
+      'Content-Type':'application/json',
+      'Authorization':'Basic token'
+    };
+
+    var url=Uri.http(Config.apiURL,Config.cartAPI);
+    var response=await client.post(url,headers: requestHeaders,body: jsonEncode({
+      "products":[
+        {
+          "product":productId,
+           "qty":qty
+        }
+      ]
+    }));
+
+    if(response.statusCode==200)
+    {
+      return true;
+    }
+    else if(response.statusCode==401)
+    {
+      //user's token is expired
+      //write code to move user to login page
+    }
+    else {
+      return null;
+    }
+
+
+
+  }
+
+
+  Future<bool?> removeCartItem(productId,qty) async{
+
+    Map<String,String> requestHeaders={
+      'Content-Type':'application/json',
+      'Authorization':'Basic token'
+    };
+
+    var url=Uri.http(Config.apiURL,Config.cartAPI);
+    var response=await client.delete(url,headers: requestHeaders,body: jsonEncode({
+        {
+          "productId":productId,
+          "qty":qty
+        }
+
+    }));
+
+    if(response.statusCode==200)
+    {
+      return true;
+    }
+    else if(response.statusCode==401)
+    {
+      //user's token is expired
+      //write code to move user to login page
+    }
+    else {
+      return null;
+    }
+
+
+
+  }
+
+
+
 
 }

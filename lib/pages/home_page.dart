@@ -17,9 +17,7 @@ class HomePage extends StatelessWidget {
 
 
     return  Scaffold(
-      body: Container(
-        child: ListView(children:  const [HomeSliderWidget() ,HomeCategoryWidget(),HomeProductWidget()],),
-      ),
+      body: ListView(children:  const [HomeSliderWidget() ,HomeCategoryWidget(),HomeProductWidget()],),
     );
   }
 }

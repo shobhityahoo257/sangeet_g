@@ -76,9 +76,9 @@ class _ProductFilter extends ConsumerWidget {
   {
     final filterProvider=ref.watch(productFilterProvider);
 
-    
+
     return Container(
-    height: 51,
+        height: 51,
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 5),
        child: Row(
          mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,8 +93,8 @@ class _ProductFilter extends ConsumerWidget {
              ),
            ),
            Container(
-             decoration: const BoxDecoration(
-               color: Colors.grey,
+             decoration:  BoxDecoration(
+               color: Colors.grey[300],
              ),
              child: PopupMenuButton(
                onSelected: (sortBy){
@@ -134,11 +134,12 @@ class _ProductFilter extends ConsumerWidget {
 class _ProductList extends ConsumerWidget{
 final ScrollController _scrollController=ScrollController();
 
+  @override
   Widget build(BuildContext context,WidgetRef ref){
 
     final productState=ref.watch(productNotifierProvider);
     _scrollController.addListener(() {
-      if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent){
+      if(_scrollController.position.pixels ==_scrollController.position.maxScrollExtent){
         final productViewModel=ref.read(productNotifierProvider.notifier);
         final productState=ref.watch(productNotifierProvider);
         if(productState.hasNext){

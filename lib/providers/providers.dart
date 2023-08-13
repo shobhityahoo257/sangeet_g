@@ -3,8 +3,10 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sangeet_g/api/api_service.dart';
+import 'package:sangeet_g/application/notifier/cart_notifier.dart';
 import 'package:sangeet_g/application/notifier/product_filter_notifier.dart';
 import 'package:sangeet_g/application/notifier/products_notifier.dart';
+import 'package:sangeet_g/application/state/cart_state.dart';
 import 'package:sangeet_g/application/state/product_state.dart';
 import 'package:sangeet_g/models/pagination.dart';
 import 'package:sangeet_g/models/product.dart';
@@ -66,3 +68,10 @@ final relatedProductProvider=
           final apiRepository=ref.watch(apiService);
           return apiRepository.getProducts(productFilterModel);
         });
+
+final cartItemsProvider=StateNotifierProvider<CartNotifier,CartState>(
+        (ref) =>CartNotifier(
+          ref.watch(apiService )
+   ),
+);
+

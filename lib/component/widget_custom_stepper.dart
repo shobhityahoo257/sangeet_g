@@ -38,8 +38,10 @@ class _CustomStepperState extends State<CustomStepper> {
               ),
             ),
             onTap: (){
+              setState(() {
               widget.value=widget.value ==widget.loweLimit?widget.loweLimit:widget.value-=widget.stepValue;
-              widget.onChanged(widget.value);
+              widget.onChanged({"qty":widget.value,"type":"-"});
+              });
             },
           ),
           SizedBox(
@@ -62,8 +64,10 @@ class _CustomStepperState extends State<CustomStepper> {
               ),
             ),
             onTap: (){
+              setState(() {
               widget.value=widget.value ==widget.upperLimit?widget.upperLimit:widget.value+=widget.stepValue;
-              widget.onChanged(widget.value);
+              widget.onChanged({"qty":widget.value,"type":"+"});
+              });
             },
           ),
         ],

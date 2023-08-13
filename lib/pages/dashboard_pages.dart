@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'cart_page.dart';
 import 'home_page.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class DashBoardPage extends StatefulWidget {
 class _DashBoardPageState extends State<DashBoardPage> {
   final List<Widget> widgetList=const [
     HomePage(),
-    HomePage(),
+    CartPage(),
     HomePage(),
     HomePage()
   ];

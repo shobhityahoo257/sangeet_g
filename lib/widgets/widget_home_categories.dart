@@ -43,7 +43,7 @@ class HomeCategoryWidget extends ConsumerWidget {
     );
     return categories.when(
       data:(list){
-        print('DATE IS RECEIVED');
+
         return _buildCategoryList(list! as List<Category>,ref);
       },
       error:(_,__)=> const Center(child : Text('ERR Got')),
@@ -82,7 +82,7 @@ class HomeCategoryWidget extends ConsumerWidget {
                   width: 150,
                   height: 100,
                   alignment: Alignment.center,
-                  child: Image.network(data.fullImagePath,height: 100,),
+                  child: Image.network(data.fullImagePath!,height: 100,),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

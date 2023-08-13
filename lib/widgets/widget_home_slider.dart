@@ -60,8 +60,8 @@ class HomeSliderWidget extends ConsumerWidget{
           aspectRatio: 16/9,
           autoPlayCurve: Curves.decelerate,
           enableInfiniteScroll: true,
-          autoPlayAnimationDuration: const Duration(microseconds: 800),
-          viewportFraction: 0.8
+          autoPlayAnimationDuration: const Duration(microseconds: 2000000),
+          viewportFraction: 0.9
 
         ));
   }
