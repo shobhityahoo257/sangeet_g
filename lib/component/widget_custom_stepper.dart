@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomStepper extends StatefulWidget {
@@ -20,21 +20,21 @@ class _CustomStepperState extends State<CustomStepper> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.orangeAccent,
+        color: Colors.green,
         borderRadius: BorderRadius.circular(10)
 
       ),
-      margin: const EdgeInsets.only(top:10),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top:1),
+      padding: const EdgeInsets.all(1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
             child: const Padding(
-              padding: EdgeInsets.only(right: 2),
+              padding: EdgeInsets.only(right: 1),
               child: Icon(
                 Icons.remove,color: Colors.black,
-                size:20
+                size:10
               ),
             ),
             onTap: (){
@@ -49,7 +49,7 @@ class _CustomStepperState extends State<CustomStepper> {
             child: Text(
               widget.value.toString(),
              style: TextStyle(
-               fontSize:widget.iconSize*.7,
+                 fontSize:widget.iconSize*.5,
              color: Colors.black),
               textAlign: TextAlign.center,
             ),
@@ -57,10 +57,10 @@ class _CustomStepperState extends State<CustomStepper> {
           ),
           GestureDetector(
             child: const Padding(
-              padding: EdgeInsets.only(right: 2),
+              padding: EdgeInsets.only(right: 1),
               child: Icon(
                   Icons.add,color: Colors.black,
-                  size:20
+                  size:10
               ),
             ),
             onTap: (){

@@ -7,6 +7,7 @@ import 'package:sangeet_g/widgets/widget_home_products.dart';
 import 'package:sangeet_g/widgets/widget_home_slider.dart';
 
 import '../models/product.dart';
+import '../widgets/widget_navbar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +18,8 @@ class HomePage extends StatelessWidget {
 
 
     return  Scaffold(
-      body: ListView(children:  const [HomeSliderWidget() ,HomeCategoryWidget(),HomeProductWidget()],),
+      body: ListView(children:  const [HomeSliderWidget() ,HomeCategoryWidget(),HomeProductWidget(),NavBar()
+      ],),
     );
   }
 }

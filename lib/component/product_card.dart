@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sangeet_g/component/widget_custom_stepper.dart';
 
 import '../config.dart';
 import '../models/product.dart';
@@ -24,21 +25,41 @@ class ProductCard extends StatelessWidget {
           children:[
             Visibility(
               visible: model!.calculateDiscount>0,
-                child: Align(
-                    alignment: Alignment.topLeft,
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child:Text("${model!.calculateDiscount}% OFF",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600
-                  ),) ,
+                child: Flexible(
+                  child: Row(
+                    children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                        ),
+                        child:Text("${model!.calculateDiscount}% OFF",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600
+                        ),) ,
 
-                ),)),
+                      ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(left: 60)),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                            child: const Icon(
+                              Icons.favorite,
+                              color: Colors.grey,
+                              size: 20,
+                            ),
+                          onTap: (){
+
+                              },
+                        ),
+                      )],
+                  ),
+                )),
             GestureDetector(onTap: (){
               Navigator.of(context).pushNamed('/product-detail',
               arguments: {'productId':model!.productId},
@@ -90,20 +111,25 @@ class ProductCard extends StatelessWidget {
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:10),
+                        child: CustomStepper(
+                          loweLimit: 0,
+                          upperLimit: 20,
+                          stepValue: 1,
+                          iconSize: 22.0,
+                          value:0,
+                          onChanged:(value){
+                           // qty=value["qty"];
+                          } ,
+
+                        ),
+                      ),
                     ],
                   ),
                   ),
-                GestureDetector(
-                  child: const Icon(
-                    Icons.favorite,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  onTap: (){
 
-                  },
-                )
                 ],
               ),
             )

@@ -57,7 +57,7 @@ class HomeSliderWidget extends ConsumerWidget{
     ,options:CarouselOptions(
           enlargeCenterPage: true,
           autoPlay: true,
-          aspectRatio: 16/9,
+          aspectRatio: 15/5,
           autoPlayCurve: Curves.decelerate,
           enableInfiniteScroll: true,
           autoPlayAnimationDuration: const Duration(microseconds: 2000000),
